@@ -36,12 +36,12 @@ class PostController {
 
     async update(req, res) {
         try {
-                const post = req.body
-                if(!post._id){
-                    res.status(400).json({ message: 'не указан id' })
-                }
-                const updatedPost = Post.findOneAndUpdate(post._id,post,{new:true});
-                return res.json(updatedPost)
+            const post = req.body
+            if (!post._id) {
+                res.status(400).json({ message: 'не указан id' })
+            }
+            const updatedPost = Post.findOneAndUpdate(post._id, post, { new: true });
+            return res.json(updatedPost)
         } catch (error) {
             res.status(500).json(error)
         } res
