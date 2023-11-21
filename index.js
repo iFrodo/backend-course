@@ -15,7 +15,7 @@ const app = express()
 //Эта функция асинхронно подключается к базе данных MongoDB и запускает сервер Express.
 async function startApp() {
     try {
-        //асинхронное подключение к бд
+        //асинхронное подключение к бд(к бд всегда асинхронное,так как требуется время для подключения к базе, что бы не останавливать загрузку приложения)
         await mongoose.connect(DB_URL)
         //слушай порт
         app.listen(PORT, () => { console.log('server working on ' + PORT + ' port') })
