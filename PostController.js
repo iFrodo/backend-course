@@ -1,4 +1,3 @@
-import Post from "./Post.js";
 import PostService from "./PostService.js";
 
 
@@ -58,6 +57,7 @@ class PostController {
             res.status(500).json(error)
         }
     }
+
 }
 
 
