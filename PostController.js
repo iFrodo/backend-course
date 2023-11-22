@@ -14,27 +14,26 @@ class PostController {
             res.status(500).json(e)
         }
     }
-
     async getAll(req, res) {
         try {
             const posts = await PostService.getAll(req.body);
             return res.json(posts)
-
         } catch (error) {
             res.status(500).json(error)
         }
     }
-
     async getOne(req, res) {
         try {
             const { id } = req.params
+            if (!id) {
+                res.status(400).json({ message: 'не указан id' })
+            }
             const post = await PostService.getOne(id)
             return res.json(post)
         } catch (error) {
             res.status(500).json(error)
         }
     }
-
     async update(req, res) {
         try {
             const post = req.body
@@ -47,7 +46,6 @@ class PostController {
             res.status(500).json(error)
         }
     }
-
     async delete(req, res) {
         try {
             const { id } = req.params;
