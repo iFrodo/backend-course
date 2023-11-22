@@ -7,10 +7,10 @@ class PostController {
 
     async create(req, res) {
         try {
-            const post = await PostService.create(req.body)
+            const post = await PostService.create(req.body,req.files.picture)
             res.status(200).json(post)
         } catch (error) {
-            res.status(500).json(e)
+            res.status(500).json(error)
         }
     }
     async getAll(req, res) {
@@ -39,7 +39,7 @@ class PostController {
             if (!post._id) {
                 res.status(400).json({ message: 'не указан id' })
             }
-            const updatedPost = await PostService.update(post._id, post, { new: true });
+            const updatedPost = await PostService.update(post);
             return res.json(updatedPost)
         } catch (error) {
             res.status(500).json(error)

@@ -3,6 +3,7 @@ import express from "express";
 //Эта строка импортирует модуль mongoose, который предоставляет функции для работы с MongoDB из вашего приложения Node.js.
 import mongoose from "mongoose";
 import router from "./Router.js";
+import fileUpload from "express-fileupload";
 //Эта строка импортирует модель Post, которую вы создали в файле Post.js.
 import Post from "./Post.js";
 //Эта строка определяет URL-адрес вашей базы данных MongoDB. Этот URL-адрес будет использоваться для подключения к базе данных.
@@ -25,7 +26,10 @@ async function startApp() {
 }
 //Эта строка говорит Express использовать встроенный middleware для анализа JSON. Это необходимо для обработки тел запросов в формате JSON.
 app.use(express.json())
+app.use(express.static('static'))
+app.use(fileUpload({}))
 app.use('/api',router)
+
 //Эта строка определяет обработчик маршрута для POST-запросов на корневой маршрут (‘/’).
 //Этот обработчик создает новый документ Post в базе данных с данными из тела запроса и отправляет этот документ обратно клиенту в ответе.
 
