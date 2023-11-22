@@ -1,4 +1,7 @@
 import Post from "./Post.js";
+
+
+//это круд класс
 class PostController {
 
     async create(req, res) {
@@ -40,16 +43,21 @@ class PostController {
             if (!post._id) {
                 res.status(400).json({ message: 'не указан id' })
             }
-            const updatedPost = Post.findOneAndUpdate(post._id, post, { new: true });
+            const updatedPost = await Post.findByIdAndUpdate(post._id, post, { new: true });
             return res.json(updatedPost)
         } catch (error) {
             res.status(500).json(error)
-        } res
+        }
     }
 
     async delete(req, res) {
         try {
-
+            const { id } = req.params;
+            if (!id) {
+                res.status(400).json({ message: 'не указан id' })
+            }
+            const post = await Post.findByIdAndDelete(id)
+            return res.json(post)
         } catch (error) {
             res.status(500).json(error)
         }
